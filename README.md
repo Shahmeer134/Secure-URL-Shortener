@@ -1,3 +1,4 @@
+## Description
 A URL Shortener application where users can create shortened URLs,track clicks, and manage their own URLs using authentication.
 
 ## Features
