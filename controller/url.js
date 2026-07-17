@@ -21,8 +21,8 @@ async function handleShortUrl(req, res) {
     createdBy: req.user._id,
   });
 
-  // return res.render("home", { id: shortId, urls: allUrls });
-  return res.redirect("/");
+  return res.render("home", { id: shortId, urls: [] });
+  // return res.redirect("/");
 }
 
 async function handleGetShortUrl(req, res) {

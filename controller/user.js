@@ -21,11 +21,18 @@ async function handleUserLogin(req, res) {
       error: "Invalid credentials",
     });
   }
-  const sessionId = uuidv4();
-  setUserId(sessionId, user);
-  res.cookie("uid", sessionId);
 
+  // const sessionId = uuidv4(); --> Use for stateFull Authentication
+  // setUserId(sessionId, user); --> Use for stateFull Authentication
+  // res.cookie("uid", sessionId); --> Use for stateFull Authentication
+
+  const token = setUserId(user);
+  res.cookie("token", token);
   return res.redirect("/");
+  // res.cookie("uid", token); --> for Cookies
+  // return res.redirect("/"); --> for Cookies
+
+  return res.json({ token }); // --> For <bearer>
 }
 
 module.exports = { handleUserSignup, handleUserLogin };

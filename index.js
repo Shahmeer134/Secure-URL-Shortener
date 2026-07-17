@@ -7,14 +7,15 @@ const app = express();
 const path = require("path");
 const cookieParser = require("cookie-parser");
 
-
 // Routes
 const urlRoute = require("./routes/url");
 const connectDB = require("./connection");
 const URL = require("./models/url");
 const userRoute = require("./routes/user");
 const staticRoute = require("./routes/staticRouter");
-const {restrictToLoggedInUser, checkAuth} = require("./middleware/auth");
+// const {restrictToLoggedInUser, checkAuth} = require("./middleware/auth"); ==> User for Old Cookies Middleware
+const { checkForAuthentication, restriction } = require("./middleware/auth");
+
 // View (Ejs)
 app.set("view engine", "ejs");
 app.set("views", path.resolve("./views"));
@@ -23,13 +24,15 @@ app.set("views", path.resolve("./views"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookieParser());
-
+app.use(checkForAuthentication);
 
 connectDB();
 
-app.use("/url", restrictToLoggedInUser, urlRoute);
+// app.use("/url", restrictToLoggedInUser, urlRoute); ==> User for Old Cookies Middleware
+app.use("/url", restriction(["NORMAL", "ADMIN"]), urlRoute);
 app.use("/user", userRoute);
-app.use("/", checkAuth, staticRoute)
+app.use("/", staticRoute)
+// app.use("/", checkAuth, staticRoute); ==> User for Old Cookies Middleware
 // app.use("/login", staticRoute)
 
 app.listen(PORT, () => {

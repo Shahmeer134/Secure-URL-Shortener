@@ -21,7 +21,8 @@
       <% } %>
   </form>
 
- 
+ <% if (urls && urls.length > 0) { %>
+
             <table border="1">
 
               <thead>
@@ -60,7 +61,7 @@
                   <% }) %>
               </tbody>
             </table>
-          
+          <% } %>
 </body>
 
 </html>
