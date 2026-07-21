@@ -4,13 +4,18 @@ const { setUserId } = require("../sevice/auth");
 const URL = require("../models/url");
 
 async function handleUserSignup(req, res) {
-  const { name, email, password } = req.body;
+  const { name, email, password, role } = req.body;
+  const profileImage = req.file ? req.file.filename : "";
+
   await User.create({
     name,
     email,
     password,
+    role: role || "NORMAL",
+    profileImage,
   });
-  return res.render("/login");
+
+  return res.redirect("/login");
 }
 
 async function handleUserLogin(req, res) {
@@ -22,17 +27,11 @@ async function handleUserLogin(req, res) {
     });
   }
 
-  // const sessionId = uuidv4(); --> Use for stateFull Authentication
-  // setUserId(sessionId, user); --> Use for stateFull Authentication
-  // res.cookie("uid", sessionId); --> Use for stateFull Authentication
-
   const token = setUserId(user);
   res.cookie("token", token);
   return res.redirect("/");
-  // res.cookie("uid", token); --> for Cookies
-  // return res.redirect("/"); --> for Cookies
 
-  return res.json({ token }); // --> For <bearer>
+  return res.json({ token }); 
 }
 
 module.exports = { handleUserSignup, handleUserLogin };

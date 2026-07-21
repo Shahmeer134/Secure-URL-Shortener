@@ -7,15 +7,22 @@
   </head>
   <body>
     <h1>Signup</h1>
-    <form action="/user" method="post">
+    <form action="/user" method="post" enctype="multipart/form-data">
       <label>Full name</label>
       <input type="text" required name="name" />
-      <label>email</label>
-      <input type="text" required name="email" />
-      <labe>Password</labe>
-      <input type="text" required name="password" />
-      <button type="submit">Sign up</button>
 
+      <label>Email</label>
+      <input type="text" required name="email" />
+
+      <label>Profile Image</label>
+      <input type="file" required name="profileImage" />
+
+      <label>Role</label>
+      <input type="text" required name="role" />
+
+      <label>Password</label>
+      <input type="password" required name="password" />
+      <button type="submit">Sign up</button>
     </form>
   </body>
 </html>

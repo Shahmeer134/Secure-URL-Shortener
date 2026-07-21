@@ -9,6 +9,13 @@
 </head>
 
 <body>
+  <% if (locals.user) { %>
+    <h2>Welcome, <%= user.name %></h2>
+    <% if (user.profileImage) { %>
+      <img src="/uploads/<%= user.profileImage %>" alt="<%= user.name %> profile image" width="120" />
+    <% } %>
+  <% } %>
+
   <h1>URL Shortner</h1>
   <form method="post" action="/url">
     <label>Enter your original URL</label>

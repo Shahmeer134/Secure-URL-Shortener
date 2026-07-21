@@ -1,16 +1,4 @@
-// StateFull Authntication
 
-// const sessionIdToUseMap = new Map();
-
-// function setUserId(id, user) {
-//     sessionIdToUseMap.set(id, user);
-// }
-
-// function getUser(id){
-//     return sessionIdToUseMap.get(id);
-// }
-
-// StateLess Authentication
 const jwt = require("jsonwebtoken");
 const secret = "short@1234";
 

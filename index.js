@@ -5,6 +5,7 @@ const ejs = require("ejs");
 const PORT = 8001;
 const app = express();
 const path = require("path");
+const fs = require("fs");
 const cookieParser = require("cookie-parser");
 
 // Routes
@@ -19,6 +20,13 @@ const { checkForAuthentication, restriction } = require("./middleware/auth");
 // View (Ejs)
 app.set("view engine", "ejs");
 app.set("views", path.resolve("./views"));
+
+const uploadDir = path.resolve("./uploads");
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir, { recursive: true });
+}
+
+app.use("/uploads", express.static(uploadDir));
 
 // Middleware
 app.use(express.urlencoded({ extended: false }));

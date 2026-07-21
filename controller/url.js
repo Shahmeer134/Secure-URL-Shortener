@@ -22,7 +22,6 @@ async function handleShortUrl(req, res) {
   });
 
   return res.render("home", { id: shortId, urls: [] });
-  // return res.redirect("/");
 }
 
 async function handleGetShortUrl(req, res) {
