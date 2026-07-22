@@ -40,8 +40,7 @@ connectDB();
 app.use("/url", restriction(["NORMAL", "ADMIN"]), urlRoute);
 app.use("/user", userRoute);
 app.use("/", staticRoute)
-// app.use("/", checkAuth, staticRoute); ==> User for Old Cookies Middleware
-// app.use("/login", staticRoute)
+
 
 app.listen(PORT, () => {
   console.log("Server running on PORT: ", PORT);

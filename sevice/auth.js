@@ -1,6 +1,6 @@
-
+require("dotenv").config();
 const jwt = require("jsonwebtoken");
-const secret = "short@1234";
+// const secret = "short@1234";
 
 function setUserId(user) {
   //   if (!token) return null;
@@ -10,14 +10,14 @@ function setUserId(user) {
       email: user.email,
       role: user.role,
     },
-    secret,
+    process.env.SECRET_KEY,
   );
 }
 
 function getUser(token) {
   if (!token) return null;
 
-  return jwt.verify(token, secret);
+  return jwt.verify(token, process.env.SECRET_KEY);
 }
 
 module.exports = {
